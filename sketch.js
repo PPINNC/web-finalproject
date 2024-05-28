@@ -3,7 +3,7 @@ let A=new Array(7).fill(0), ax=new Array(7).fill(0), ay=new Array(7).fill(0), ar
 let B=new Array(7).fill(0), bx=new Array(7).fill(0), by=new Array(7).fill(0), bh=new Array(7).fill(1);
 let C=new Array(13).fill(0), cx=new Array(13).fill(0), cy=new Array(13).fill(0), ch=new Array(13).fill(1);
 let D=new Array(20).fill(0), dx=new Array(20).fill(0), dy=new Array(20).fill(0), dh=new Array(20).fill(1);
-let E=new Array(80).fill(0), ex=new Array(80).fill(0), ey=new Array(80).fill(0), eh=new Array(80).fill(1);
+let E=new Array(200).fill(0), ex=new Array(200).fill(0), ey=new Array(200).fill(0), eh=new Array(200).fill(1);
 let Bullet1=new Array(10).fill(0), Bullet1x=new Array(10).fill(0), Bullet1y=new Array(10).fill(0);
 let Bullet2=new Array(30).fill(0), Bullet2x=new Array(30).fill(0), Bullet2y=new Array(30).fill(0);
 let Bullet3=new Array(50).fill(0), Bullet3x=new Array(50).fill(0), Bullet3y=new Array(50).fill(0), x3shift=new Array(50).fill(0);
@@ -182,15 +182,15 @@ function draw() {
     poi();
     bullet();
     timecontrol1++;
-    if(timecontrol1==1000){
+    if(timecontrol1==500){
       timecontrol1=0;
     }
     timecontrol2++;
-    if(timecontrol2==600){
+    if(timecontrol2==300){
       timecontrol2=0;
     }
     timecontrol3++;
-    if(timecontrol3==750){
+    if(timecontrol3==350){
       timecontrol3=0;
     }
   }
@@ -209,7 +209,7 @@ function draw() {
       B=new Array(7).fill(0); bx=new Array(7).fill(0); by=new Array(7).fill(0); bh=new Array(7).fill(1);
       C=new Array(13).fill(0); cx=new Array(13).fill(0); cy=new Array(13).fill(0); ch=new Array(13).fill(1);
       D=new Array(20).fill(0); dx=new Array(20).fill(0); dy=new Array(20).fill(0); dh=new Array(20).fill(1);
-      E=new Array(80).fill(0); ex=new Array(80).fill(0); ey=new Array(80).fill(0); eh=new Array(80).fill(1);
+      E=new Array(200).fill(0); ex=new Array(200).fill(0); ey=new Array(200).fill(0); eh=new Array(200).fill(1);
       Bullet1=new Array(10).fill(0); Bullet1x=new Array(10).fill(0); Bullet1y=new Array(10).fill(0);
       Bullet2=new Array(30).fill(0); Bullet2x=new Array(30).fill(0); Bullet2y=new Array(30).fill(0);
       Bullet3=new Array(50).fill(0); Bullet3x=new Array(50).fill(0); Bullet3y=new Array(50).fill(0); x3shift=new Array(50).fill(0);
@@ -228,7 +228,7 @@ function draw() {
 function bullet(){
   if(slhair.value()==1){
     for(let i=0; i<10; i++){
-      if(timecontrol1==100*i && Bullet1[i]==0 && state_S==1){
+      if(timecontrol1==50*i && Bullet1[i]==0 && state_S==1){
         Bullet1[i]=1;
         Bullet1x[i]=mouseX;
         Bullet1y[i]=mouseY-50;
@@ -251,7 +251,7 @@ function bullet(){
   }
   else if(slhair.value()==2){
     for(let i=0; i<30; i++){
-      if(timecontrol2==20*i && Bullet2[i]==0 && state_S==1){
+      if(timecontrol2==10*i && Bullet2[i]==0 && state_S==1){
         Bullet2[i]=1;
         Bullet2x[i]=mouseX;
         Bullet2y[i]=mouseY-50;
@@ -275,7 +275,7 @@ function bullet(){
   }
   else{
     for(let i=0; i<50; i++){
-      if(timecontrol3==15*i && Bullet3[i]==0 && state_S==1){
+      if(timecontrol3==7*i && Bullet3[i]==0 && state_S==1){
         Bullet3[i]=1;
         x3shift[i]=0;
         Bullet3x[i]=mouseX;
@@ -310,7 +310,7 @@ function poi(){
       text('score: ', 10, 40);
       text(pt, 130, 40);
       pop();
-      if((bx[i]-mouseX)*(bx[i]-mouseX)+(by[i]-mouseY)*(by[i]-mouseY)<400 && state_S==1){
+      if((bx[i]-mouseX)*(bx[i]-mouseX)+(by[i]-mouseY)*(by[i]-mouseY)<401 && state_S==1){
         pt-=bh[i];
         hp-=bh[i];
         B[i]=0;
@@ -319,24 +319,24 @@ function poi(){
       }
       if(slhair.value()==1){
         for(let j=0; j<10; j++){
-          if(Bullet1[j]==1 && (bx[i]-Bullet1x[j])*(bx[i]-Bullet1x[j])+(by[i]-Bullet1y[j])*(by[i]-Bullet1y[j])<400){
-            bh[i]-=20;
+          if(Bullet1[j]==1 && (bx[i]-Bullet1x[j])*(bx[i]-Bullet1x[j])+(by[i]-Bullet1y[j])*(by[i]-Bullet1y[j])<401){
+            bh[i]-=30;
             Bullet1[j]=0;
           }
         }
       }
       else if(slhair.value()==2){
         for(let j=0; j<30; j++){
-          if(Bullet2[j]==1 && (bx[i]-Bullet2x[j])*(bx[i]-Bullet2x[j])+(by[i]-Bullet2y[j])*(by[i]-Bullet2y[j])<400){
-            bh[i]-=5;
+          if(Bullet2[j]==1 && (bx[i]-Bullet2x[j])*(bx[i]-Bullet2x[j])+(by[i]-Bullet2y[j])*(by[i]-Bullet2y[j])<401){
+            bh[i]-=10;
             Bullet2[j]=0;
           }
         }
       }
       else{
         for(let j=0; j<50; j++){
-          if(Bullet3[j]==1 && ((bx[i]-Bullet3x[j])*(bx[i]-Bullet3x[j])+(by[i]-Bullet3y[j])*(by[i]-Bullet3y[j])<400 || (bx[i]-Bullet3x[j]-x3shift[j])*(bx[i]-Bullet3x[j]-x3shift[j])+(by[i]-Bullet3y[j])*(by[i]-Bullet3y[j])<400 || (bx[i]-Bullet3x[j]+x3shift[j])*(bx[i]-Bullet3x[j]+x3shift[j])+(by[i]-Bullet3y[j])*(by[i]-Bullet3y[j])<400)){
-            bh[i]-=4;
+          if(Bullet3[j]==1 && ((bx[i]-Bullet3x[j])*(bx[i]-Bullet3x[j])+(by[i]-Bullet3y[j])*(by[i]-Bullet3y[j])<401 || (bx[i]-Bullet3x[j]-x3shift[j])*(bx[i]-Bullet3x[j]-x3shift[j])+(by[i]-Bullet3y[j])*(by[i]-Bullet3y[j])<401 || (bx[i]-Bullet3x[j]+x3shift[j])*(bx[i]-Bullet3x[j]+x3shift[j])+(by[i]-Bullet3y[j])*(by[i]-Bullet3y[j])<401)){
+            bh[i]-=8;
             Bullet3[j]=0;
           }
         }
@@ -368,7 +368,7 @@ function poi(){
   if(sllevel.value()>=2){
     for(let i=0; i<13; i++){
       let tC=random(0, 20);
-      if((cx[i]-mouseX)*(cx[i]-mouseX)+(cy[i]-mouseY)*(cy[i]-mouseY)<400 && state_S==1){
+      if((cx[i]-mouseX)*(cx[i]-mouseX)+(cy[i]-mouseY)*(cy[i]-mouseY)<401 && state_S==1){
         pt-=ch[i];
         hp-=ch[i];
         C[i]=0;
@@ -377,24 +377,24 @@ function poi(){
       }
       if(slhair.value()==1){
         for(let j=0; j<10; j++){
-          if(Bullet1[j]==1 && (cx[i]-Bullet1x[j])*(cx[i]-Bullet1x[j])+(cy[i]-Bullet1y[j])*(cy[i]-Bullet1y[j])<400){
-            ch[i]-=20;
+          if(Bullet1[j]==1 && (cx[i]-Bullet1x[j])*(cx[i]-Bullet1x[j])+(cy[i]-Bullet1y[j])*(cy[i]-Bullet1y[j])<401){
+            ch[i]-=30;
             Bullet1[j]=0;
           }
         }
       }
       else if(slhair.value()==2){
         for(let j=0; j<30; j++){
-          if(Bullet2[j]==1 && (cx[i]-Bullet2x[j])*(cx[i]-Bullet2x[j])+(cy[i]-Bullet2y[j])*(cy[i]-Bullet2y[j])<400){
-            ch[i]-=5;
+          if(Bullet2[j]==1 && (cx[i]-Bullet2x[j])*(cx[i]-Bullet2x[j])+(cy[i]-Bullet2y[j])*(cy[i]-Bullet2y[j])<401){
+            ch[i]-=10;
             Bullet2[j]=0;
           }
         }
       }
       else{
         for(let j=0; j<50; j++){
-          if(Bullet3[j]==1 && ((cx[i]-Bullet3x[j])*(cx[i]-Bullet3x[j])+(cy[i]-Bullet3y[j])*(cy[i]-Bullet3y[j])<400 || (cx[i]-Bullet3x[j]-x3shift[j])*(cx[i]-Bullet3x[j]-x3shift[j])+(cy[i]-Bullet3y[j])*(cy[i]-Bullet3y[j])<400 || (cx[i]-Bullet3x[j]+x3shift[j])*(cx[i]-Bullet3x[j]+x3shift[j])+(cy[i]-Bullet3y[j])*(cy[i]-Bullet3y[j])<400)){
-            ch[i]-=4;
+          if(Bullet3[j]==1 && ((cx[i]-Bullet3x[j])*(cx[i]-Bullet3x[j])+(cy[i]-Bullet3y[j])*(cy[i]-Bullet3y[j])<401 || (cx[i]-Bullet3x[j]-x3shift[j])*(cx[i]-Bullet3x[j]-x3shift[j])+(cy[i]-Bullet3y[j])*(cy[i]-Bullet3y[j])<401 || (cx[i]-Bullet3x[j]+x3shift[j])*(cx[i]-Bullet3x[j]+x3shift[j])+(cy[i]-Bullet3y[j])*(cy[i]-Bullet3y[j])<401)){
+            ch[i]-=8;
             Bullet3[j]=0;
           }
         }
@@ -430,7 +430,7 @@ function poi(){
   if(sllevel.value()>=3){
     for(let i=0; i<20; i++){
       let tD=random(0, 20);
-      if((dx[i]-mouseX)*(dx[i]-mouseX)+(dy[i]-mouseY)*(dy[i]-mouseY)<400 && state_S==1){
+      if((dx[i]-mouseX)*(dx[i]-mouseX)+(dy[i]-mouseY)*(dy[i]-mouseY)<401 && state_S==1){
         pt-=dh[i];
         hp-=dh[i];
         D[i]=0;
@@ -439,24 +439,24 @@ function poi(){
       }
       if(slhair.value()==1){
         for(let j=0; j<10; j++){
-          if(Bullet1[j]==1 && (dx[i]-Bullet1x[j])*(dx[i]-Bullet1x[j])+(dy[i]-Bullet1y[j])*(dy[i]-Bullet1y[j])<400){
-            dh[i]-=20;
+          if(Bullet1[j]==1 && (dx[i]-Bullet1x[j])*(dx[i]-Bullet1x[j])+(dy[i]-Bullet1y[j])*(dy[i]-Bullet1y[j])<401){
+            dh[i]-=30;
             Bullet1[j]=0;
           }
         }
       }
       else if(slhair.value()==2){
         for(let j=0; j<30; j++){
-          if(Bullet2[j]==1 && (dx[i]-Bullet2x[j])*(dx[i]-Bullet2x[j])+(dy[i]-Bullet2y[j])*(dy[i]-Bullet2y[j])<400){
-            dh[i]-=5;
+          if(Bullet2[j]==1 && (dx[i]-Bullet2x[j])*(dx[i]-Bullet2x[j])+(dy[i]-Bullet2y[j])*(dy[i]-Bullet2y[j])<401){
+            dh[i]-=10;
             Bullet2[j]=0;
           }
         }
       }
       else{
         for(let j=0; j<50; j++){
-          if(Bullet3[j]==1 && ((dx[i]-Bullet3x[j])*(dx[i]-Bullet3x[j])+(dy[i]-Bullet3y[j])*(dy[i]-Bullet3y[j])<400 || (dx[i]-Bullet3x[j]-x3shift[j])*(dx[i]-Bullet3x[j]-x3shift[j])+(dy[i]-Bullet3y[j])*(dy[i]-Bullet3y[j])<200 || (dx[i]-Bullet3x[j]+x3shift[j])*(dx[i]-Bullet3x[j]+x3shift[j])+(dy[i]-Bullet3y[j])*(dy[i]-Bullet3y[j])<200)){
-            dh[i]-=4;
+          if(Bullet3[j]==1 && ((dx[i]-Bullet3x[j])*(dx[i]-Bullet3x[j])+(dy[i]-Bullet3y[j])*(dy[i]-Bullet3y[j])<401 || (dx[i]-Bullet3x[j]-x3shift[j])*(dx[i]-Bullet3x[j]-x3shift[j])+(dy[i]-Bullet3y[j])*(dy[i]-Bullet3y[j])<200 || (dx[i]-Bullet3x[j]+x3shift[j])*(dx[i]-Bullet3x[j]+x3shift[j])+(dy[i]-Bullet3y[j])*(dy[i]-Bullet3y[j])<200)){
+            dh[i]-=8;
             Bullet3[j]=0;
           }
         }
@@ -496,33 +496,33 @@ function poi(){
     }
     for(let i=0; i<k; i++){
       let tE=random(0, 20);
-      if((ex[i]-mouseX)*(ex[i]-mouseX)+(ey[i]-mouseY)*(ey[i]-mouseY)<400 && state_S==1){
+      if((ex[i]-mouseX)*(ex[i]-mouseX)+(ey[i]-mouseY)*(ey[i]-mouseY)<401 && state_S==1){
         pt-=eh[i];
         hp-=eh[i];
         E[i]=0;
         ey[i]=-40;
-        eh[i]=50;
+        eh[i]=30;
       }
       if(slhair.value()==1){
         for(let j=0; j<10; j++){
-          if(Bullet1[j]==1 && (ex[i]-Bullet1x[j])*(ex[i]-Bullet1x[j])+(ey[i]-Bullet1y[j])*(ey[i]-Bullet1y[j])<400){
-            eh[i]-=20;
+          if(Bullet1[j]==1 && (ex[i]-Bullet1x[j])*(ex[i]-Bullet1x[j])+(ey[i]-Bullet1y[j])*(ey[i]-Bullet1y[j])<401){
+            eh[i]-=30;
             Bullet1[j]=0;
           }
         }
       }
       else if(slhair.value()==2){
         for(let j=0; j<30; j++){
-          if(Bullet2[j]==1 && (ex[i]-Bullet2x[j])*(ex[i]-Bullet2x[j])+(ey[i]-Bullet2y[j])*(ey[i]-Bullet2y[j])<400){
-            eh[i]-=5;
+          if(Bullet2[j]==1 && (ex[i]-Bullet2x[j])*(ex[i]-Bullet2x[j])+(ey[i]-Bullet2y[j])*(ey[i]-Bullet2y[j])<401){
+            eh[i]-=10;
             Bullet2[j]=0;
           }
         }
       }
       else{
         for(let j=0; j<50; j++){
-          if(Bullet3[j]==1 && ((ex[i]-Bullet3x[j])*(ex[i]-Bullet3x[j])+(ey[i]-Bullet3y[j])*(ey[i]-Bullet3y[j])<400 || (ex[i]-Bullet3x[j]-x3shift[j])*(ex[i]-Bullet3x[j]-x3shift[j])+(ey[i]-Bullet3y[j])*(ey[i]-Bullet3y[j])<400 || (ex[i]-Bullet3x[j]+x3shift[j])*(ex[i]-Bullet3x[j]+x3shift[j])+(ey[i]-Bullet3y[j])*(ey[i]-Bullet3y[j])<400)){
-            eh[i]-=4;
+          if(Bullet3[j]==1 && ((ex[i]-Bullet3x[j])*(ex[i]-Bullet3x[j])+(ey[i]-Bullet3y[j])*(ey[i]-Bullet3y[j])<401 || (ex[i]-Bullet3x[j]-x3shift[j])*(ex[i]-Bullet3x[j]-x3shift[j])+(ey[i]-Bullet3y[j])*(ey[i]-Bullet3y[j])<401 || (ex[i]-Bullet3x[j]+x3shift[j])*(ex[i]-Bullet3x[j]+x3shift[j])+(ey[i]-Bullet3y[j])*(ey[i]-Bullet3y[j])<401)){
+            eh[i]-=8;
             Bullet3[j]=0;
           }
         }
@@ -531,12 +531,12 @@ function poi(){
         pt+=50;
         E[i]=0;
         ey[i]=-40;
-        eh[i]=50;
+        eh[i]=30;
       }
       if(tE<1 && E[i]==0){
         E[i]=1;
         ex[i]=random(0, windowWidth);
-        eh[i]=50;
+        eh[i]=30;
       }
       if(E[i]==1){
         if(ey[i]<windowHeight+40){
