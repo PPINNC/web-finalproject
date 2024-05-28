@@ -3,7 +3,7 @@ let A=new Array(7).fill(0), ax=new Array(7).fill(0), ay=new Array(7).fill(0), ar
 let B=new Array(7).fill(0), bx=new Array(7).fill(0), by=new Array(7).fill(0), bh=new Array(7).fill(1);
 let C=new Array(13).fill(0), cx=new Array(13).fill(0), cy=new Array(13).fill(0), ch=new Array(13).fill(1);
 let D=new Array(20).fill(0), dx=new Array(20).fill(0), dy=new Array(20).fill(0), dh=new Array(20).fill(1);
-let E=new Array(20).fill(0), ex=new Array(20).fill(0), ey=new Array(20).fill(0), eh=new Array(20).fill(1);
+let E=new Array(500).fill(0), ex=new Array(500).fill(0), ey=new Array(500).fill(0), eh=new Array(500).fill(1);
 let Bullet1=new Array(10).fill(0), Bullet1x=new Array(10).fill(0), Bullet1y=new Array(10).fill(0);
 let Bullet2=new Array(30).fill(0), Bullet2x=new Array(30).fill(0), Bullet2y=new Array(30).fill(0);
 let Bullet3=new Array(50).fill(0), Bullet3x=new Array(50).fill(0), Bullet3y=new Array(50).fill(0), x3shift=new Array(50).fill(0);
@@ -25,7 +25,7 @@ function sou0(){
 }
 
 function sou2(){
-  if(state_G==2 && (sllevel.value()==1 || sllevel.value()==2)){
+  if(state_G==2 && sllevel.value()<=2){
     if(!sound2.isPlaying()){
       sound2.loop();
     }
@@ -33,7 +33,7 @@ function sou2(){
 }
 
 function sou3(){
-  if(state_G==2 && (sllevel.value()==3 || sllevel.value()==4)){
+  if(state_G==2 && sllevel.value()>=3){
     if(!sound3.isPlaying()){
       sound3.loop();
     }
@@ -96,7 +96,7 @@ function draw() {
     }
     if(s_level==0){
       s_level=1;
-      sllevel=createSlider(1, 4, 1, 1);
+      sllevel=createSlider(1, 5, 1, 1);
       sllevel.position(width*7/9, height/1.1-180);
       sllevel.size(120);
     }
@@ -148,6 +148,9 @@ function draw() {
       text("Hard", width*7/9+5, height/1.1-180);
     }
     else if(sllevel.value()==4){
+      text("Extra", width*7/9+5, height/1.1-180);
+    }
+    else{
       text("HELL...", width*7/9+5, height/1.1-180);
     }
   }
@@ -206,7 +209,7 @@ function draw() {
       B=new Array(7).fill(0); bx=new Array(7).fill(0); by=new Array(7).fill(0); bh=new Array(7).fill(1);
       C=new Array(13).fill(0); cx=new Array(13).fill(0); cy=new Array(13).fill(0); ch=new Array(13).fill(1);
       D=new Array(20).fill(0); dx=new Array(20).fill(0); dy=new Array(20).fill(0); dh=new Array(20).fill(1);
-      E=new Array(20).fill(0); ex=new Array(20).fill(0); ey=new Array(20).fill(0); eh=new Array(20).fill(1);
+      E=new Array(500).fill(0); ex=new Array(500).fill(0); ey=new Array(500).fill(0); eh=new Array(500).fill(1);
       Bullet1=new Array(10).fill(0); Bullet1x=new Array(10).fill(0); Bullet1y=new Array(10).fill(0);
       Bullet2=new Array(30).fill(0); Bullet2x=new Array(30).fill(0); Bullet2y=new Array(30).fill(0);
       Bullet3=new Array(50).fill(0); Bullet3x=new Array(50).fill(0); Bullet3y=new Array(50).fill(0); x3shift=new Array(50).fill(0);
@@ -487,7 +490,11 @@ function poi(){
     }
   }
   if(sllevel.value()>=4){
-    for(let i=0; i<20; i++){
+    let k=20;
+    if(sllevel.value()==5){
+      k=500;
+    }
+    for(let i=0; i<k; i++){
       let tE=random(0, 20);
       if((ex[i]-mouseX)*(ex[i]-mouseX)+(ey[i]-mouseY)*(ey[i]-mouseY)<640 && state_S==1){
         pt-=eh[i];
